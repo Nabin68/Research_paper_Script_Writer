@@ -1,0 +1,63 @@
+{
+  "_help": "This is your editable source list. To add a source, add one item to the right list below, then save. The next run picks it up automatically. JSON has no comments, so keep the structure (commas, quotes, brackets) intact. When in doubt, ask Claude to add it for you.",
+
+  "labs": [
+    "Anthropic",
+    "OpenAI",
+    "Google",
+    "Google DeepMind",
+    "DeepMind",
+    "Meta",
+    "Meta AI",
+    "FAIR",
+    "Microsoft",
+    "Microsoft Research",
+    "NVIDIA",
+    "Mistral",
+    "Mistral AI",
+    "DeepSeek",
+    "Alibaba",
+    "Qwen",
+    "xAI",
+    "Cohere",
+    "Stability AI",
+    "Hugging Face",
+    "Allen Institute for AI",
+    "AI2"
+  ],
+
+  "rss_feeds": [
+    { "lab": "OpenAI",           "url": "https://openai.com/blog/rss.xml" },
+    { "lab": "Google DeepMind",  "url": "https://deepmind.google/blog/rss.xml" },
+    { "lab": "Google Research",  "url": "https://research.google/blog/rss/" }
+  ],
+
+  "scrape_pages": [
+    { "lab": "Anthropic", "url": "https://www.anthropic.com/news" },
+    { "lab": "Meta AI",   "url": "https://ai.meta.com/blog/" }
+  ],
+
+  "subreddits": [
+    "MachineLearning",
+    "LocalLLaMA"
+  ],
+
+  "arxiv_categories": [
+    "cs.AI",
+    "cs.LG",
+    "cs.CL"
+  ],
+
+  "creators": [],
+
+  "twitter_handles": [],
+
+  "settings": {
+    "arxiv_lookback_days": 3,
+    "arxiv_max_per_category": 60,
+    "blog_lookback_days": 21,
+    "hf_lookback_days": 3,
+    "digest_top_n": 25,
+    "github_trending_spoken_languages": ["python"]
+  }
+}

@@ -1,0 +1,30 @@
+==== 14/07/2026 17:47:05.35 ==== 
+== Finding Papers — run for 2026-07-14 ==
+Fetching sources...
+  HuggingFace: 28 paper-days
+  arXiv (big-lab only): 8 papers
+  Lab RSS feeds (last 21d): 36 posts
+  Scraped lab pages: 21 posts
+    ! fetch failed: https://www.reddit.com/r/LocalLLaMA/top/.rss?t=day  (HTTP Error 429: Too Many Requests)
+  Reddit: 9 posts, 0 arXiv mentions
+  GitHub trending: 7 AI repos
+
+Done. Ledger: 107 total rows (+0 new).
+Digest: C:\Users\KIIT\OneDrive\Desktop\Finding_Papers\digests\digest_2026-07-14.md
+Ledger: C:\Users\KIIT\OneDrive\Desktop\Finding_Papers\papers.csv
+ 
+==== 15/07/2026  9:34:13.97 ==== 
+== Finding Papers — run for 2026-07-15 ==
+Fetching sources...
+  HuggingFace: 35 paper-days
+  arXiv (big-lab only): 12 papers
+  Lab RSS feeds (last 21d): 35 posts
+  Scraped lab pages: 22 posts
+    ! fetch failed: https://www.reddit.com/r/LocalLLaMA/top/.rss?t=day  (HTTP Error 429: Too Many Requests)
+  Reddit: 5 posts, 0 arXiv mentions
+  GitHub trending: 7 AI repos
+
+Done. Ledger: 152 total rows (+9 new).
+Digest: C:\Users\KIIT\OneDrive\Desktop\Finding_Papers\digests\digest_2026-07-15.md
+Ledger: C:\Users\KIIT\OneDrive\Desktop\Finding_Papers\papers.csv
+ 

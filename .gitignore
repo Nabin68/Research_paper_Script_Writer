@@ -1,0 +1,10 @@
+# Python bytecode cache — regenerated automatically, not source
+__pycache__/
+*.pyc
+
+# Local Claude Code session settings (machine-specific permission allowlist)
+.claude/
+
+# OS cruft
+Thumbs.db
+.DS_Store
