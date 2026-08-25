@@ -56,6 +56,16 @@ STOPWORDS = {
     "is", "are", "using", "via", "from", "at", "by", "as", "into",
 }
 
+# Words so common across AI paper titles that 2+ of THEM overlapping is not
+# real evidence of a match (e.g. "language" + "models" matched two totally
+# unrelated papers on 2026-07-15 — both titles just happened to contain both
+# words). Excluded from scoring unless the query has nothing else to go on.
+GENERIC_AI_TERMS = {
+    "language", "model", "models", "learning", "neural", "network",
+    "networks", "deep", "large", "based", "approach", "framework", "new",
+    "system", "systems", "toward", "towards", "general", "generative",
+}
+
 
 def tokenize(text):
     """Meaningful words only: drop stopwords and very short tokens so a
@@ -74,18 +84,21 @@ def find_paper(query):
     for r in rows:
         if q in (r.get("url", "").lower()):
             return r
-    # 2) best keyword overlap on title (meaningful words only)
+    # 2) best keyword overlap on title (meaningful, non-generic words only —
+    # fall back to the full word set if the query is ALL generic terms, e.g.
+    # a query that's just "language model").
     q_words = tokenize(q)
+    q_specific = q_words - GENERIC_AI_TERMS or q_words
     best, best_score = None, 0
     for r in rows:
         t_words = tokenize(r.get("title", ""))
-        score = len(q_words & t_words)
+        score = len(q_specific & t_words)
         if score > best_score:
             best, best_score = r, score
     # Require 2+ overlapping meaningful words when the query has 2+ of its
     # own — a single shared word (often a generic one) isn't enough evidence.
     # A genuinely single-word query (e.g. "SensorFM") only needs 1 match.
-    min_required = 2 if len(q_words) >= 2 else 1
+    min_required = 2 if len(q_specific) >= 2 else 1
     return best if best_score >= min_required else None
 
 

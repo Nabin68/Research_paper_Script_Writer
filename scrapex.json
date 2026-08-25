@@ -1,0 +1,52 @@
+{
+  "_help": "Editable config for ScrapeX (scrapex.py). Add accounts or search queries to the lists below and save; the next run picks them up. JSON has no comments, so keep the structure (commas, quotes, brackets) intact. Handles go WITHOUT the leading @. When in doubt, ask Claude to edit it for you.",
+
+  "_accounts_help": "X accounts whose timelines we read every run. These are the paper-discovery accounts — when they post a paper, that paper is on the radar. 'role' is a note for you, not used by the code. Retweets count: if one of these accounts RTs a paper post, we take the ORIGINAL post's metrics and record who surfaced it.",
+  "x_accounts": [
+    { "handle": "askalphaxiv",      "name": "alphaXiv",           "role": "feed" },
+    { "handle": "omarsar0",         "name": "Elvis Saravia",      "role": "creator" },
+    { "handle": "dair_ai",          "name": "DAIR.AI",            "role": "feed" },
+    { "handle": "_akhaliq",         "name": "AK",                 "role": "feed" },
+    { "handle": "arxiv",            "name": "arXiv",              "role": "feed" },
+    { "handle": "iScienceLuvr",     "name": "Tanishq Abraham",    "role": "feed" },
+    { "handle": "arankomatsuzaki",  "name": "Aran Komatsuzaki",   "role": "feed" },
+    { "handle": "TheTuringPost",    "name": "The Turing Post",    "role": "creator" },
+    { "handle": "rohanpaul_ai",     "name": "Rohan Paul",         "role": "creator" },
+    { "handle": "cwolferesearch",   "name": "Cameron Wolfe",      "role": "creator" },
+    { "handle": "huggingface",      "name": "Hugging Face",       "role": "feed" }
+  ],
+
+  "_search_help": "Full-site X searches, run after the account timelines. This is how papers reach us from accounts NOT on the list above ('and many more'). These are raw X search strings — every X search operator works: min_faves:N, min_retweets:N, -filter:replies, since:YYYY-MM-DD, lang:en. Raise the min_faves numbers if a run returns too much noise.",
+  "search_queries": [
+    "arxiv.org/abs min_faves:200 -filter:replies lang:en",
+    "huggingface.co/papers min_faves:150 -filter:replies lang:en",
+    "alphaxiv.org min_faves:80 -filter:replies lang:en",
+    "(\"new paper\" OR \"our paper\" OR \"paper drop\") arxiv min_faves:400 -filter:replies lang:en"
+  ],
+
+  "_weights_help": "How a post's reach turns into a number. views measures exposure; engagement measures whether anyone actually cared, so engagement is multiplied up to sit on the same scale as views (engagement typically runs 1-2% of views). Retweets/quotes/bookmarks are weighted above likes because they cost the reader more. Edit these to retune what floats to the top.",
+  "weights": {
+    "like": 1,
+    "reply": 1,
+    "repost": 2,
+    "quote": 2,
+    "bookmark": 2,
+    "engagement_multiplier": 50,
+    "extra_creator_bonus": 0.25,
+    "halflife_days": 10
+  },
+
+  "_settings_help": "tweets_per_account / tweets_per_query bound how much each source pulls per run. min_reach_to_report is the floor a paper must clear before it shows up in the report at all (it is still stored). climb_threshold is how much a paper's reach must GROW, as a fraction, before an already-reported paper resurfaces in the 'still climbing' section — 0.5 means it needs +50%. request_delay_seconds spaces out calls so X does not rate-limit the run.",
+  "_rate_limit_help": "X rate-limits hard, and the limit is per account across a rolling window — not per run. Each account costs a lookup plus one request per page of tweets, so 11 accounts at 25 tweets is roughly 25-30 requests before the searches even start. Symptoms of being throttled: 'X rate-limited us' on timelines, and searches quietly returning 0 tweets (X answers SearchTimeline with a 404 rather than a 429 when it is throttling you). The fix is always to wait, not to retry — this is meant to be run about once a day, which comfortably fits the budget.",
+  "settings": {
+    "tweets_per_account": 25,
+    "tweets_per_query": 25,
+    "search_product": "Top",
+    "lookback_days": 14,
+    "min_reach_to_report": 5000,
+    "climb_threshold": 0.5,
+    "report_top_n": 25,
+    "request_delay_seconds": 5,
+    "resolve_titles": true
+  }
+}

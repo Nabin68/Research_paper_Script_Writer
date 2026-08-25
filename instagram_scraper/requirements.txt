@@ -1,0 +1,13 @@
+# Dependencies for instagram_scraper only. The rest of this project is
+# standard-library, so these are deliberately kept scoped to this package.
+#
+#   pip install -r instagram_scraper/requirements.txt
+#   python -m playwright install chromium
+#
+# The Chromium download is a separate step and is NOT covered by pip.
+
+playwright>=1.44
+pydantic>=2.7
+loguru>=0.7
+tenacity>=8.2
+python-dotenv>=1.0

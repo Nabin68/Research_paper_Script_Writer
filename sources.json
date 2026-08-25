@@ -42,6 +42,18 @@
     "LocalLLaMA"
   ],
 
+  "_bluesky_help": "Bluesky handles to watch for AI-paper buzz. We read each account's public feed (no login) and score papers by the likes+reposts on posts that link an arXiv paper. Add prolific paper-sharers here. NOTE: global search is auth-walled, so only accounts listed here are read (like the RSS list). Category bots such as arxiv-cs-cl.bsky.social give broad coverage but ~zero engagement (no buzz); the humans below are the real trending signal.",
+  "bluesky_accounts": [
+    "rasbt.bsky.social",
+    "jxmnop.bsky.social",
+    "srush.bsky.social",
+    "natolambert.bsky.social",
+    "emollick.bsky.social",
+    "tomgoldstein.bsky.social",
+    "sungkim.bsky.social",
+    "danielvanstrien.bsky.social"
+  ],
+
   "arxiv_categories": [
     "cs.AI",
     "cs.LG",
@@ -52,12 +64,17 @@
 
   "twitter_handles": [],
 
+  "_research_filter_help": "Authenticity gate (research_filter.py) runs after items are merged and before scoring. It keeps anything with a real arxiv id, drops obvious non-research (hiring/pricing/partnership/announcement) items, and sends the rest to an LLM to confirm they're backed by actual research. If ANTHROPIC_API_KEY (or ANTHROPIC_AUTH_TOKEN) is set it calls the API directly with llm_filter_model. If no key is set, it writes the undecided items to agent1_verify_queue.json for Claude Code to classify, then applies the result via: python finding_papers.py --apply-verification. Set research_filter_enabled to false to turn the gate off entirely.",
   "settings": {
     "arxiv_lookback_days": 3,
     "arxiv_max_per_category": 60,
     "blog_lookback_days": 21,
     "hf_lookback_days": 3,
+    "bluesky_limit": 40,
+    "bluesky_lookback_days": 14,
     "digest_top_n": 25,
-    "github_trending_spoken_languages": ["python"]
+    "github_trending_spoken_languages": ["python"],
+    "research_filter_enabled": true,
+    "llm_filter_model": "claude-opus-4-8"
   }
 }

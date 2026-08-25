@@ -86,9 +86,15 @@ Write the refined script to the VERSIONED path the prep step reports:
   `Scripting_reference_things/7 script type template.md`) — even if the incoming draft wasn't in
   it. That means: metadata with emoji headers on top → a **`Reference:`** links block at the top
   of the script → numbered **`[HOOK 1 — tag]`, `[HOOK 2 — tag]`…** (flexible count, small strategy
-  tag) → **`[RE-HOOK]`** → **`[BODY]`** with plain bold sub-labels → **`[CTA]`**. The whole SCRIPT
-  BLOCK (Reference → CTA) is **bold and emoji-free**; the surrounding metadata keeps its emojis.
-  If the draft is missing the `Reference:` links, add them (web-find the real sources).
+  tag) → **`[RE-HOOK]`** → **`[BODY]`** → **`[CTA]`**. The whole SCRIPT BLOCK (Reference → CTA) is
+  **bold and emoji-free**; the surrounding metadata keeps its emojis. If the draft is missing the
+  `Reference:` links, add them (web-find the real sources).
+- **`[BODY]` is ONE continuous story — never bold section headers** (EVERYDAY STAKES: /
+  WHY THE OLD WAY FAILED: / etc.). If an incoming draft HAS these labels, remove them as part of
+  the refine and rewrite the seams as spoken bridge sentences instead ("But there's a catch." /
+  "And here's the part that will blow your mind."). See the template's "BODY IS ONE STORY, NOT
+  FOUR LABELED CHUNKS" section for the full technique + worked example — this was a real
+  correction on 2026-07-15 after labeled bodies tested as disconnected/choppy.
 - Preserve the user's wording/voice inside that structure — reformatting is not rewriting.
 - End the file with:
 
@@ -135,6 +141,29 @@ Keep it short and scannable. It's how the user sees your reasoning and trains yo
 · plus structural tags: `hook is a bare number` · `wow needs setup` · `shock lands instantly`
 · `paper is dense` · `already tight` · `runtime long`.
 
+- **IF** writing or refining ANY TYPE-4 research-paper **BODY** (this is the page default; bend it
+  only when a specific paper genuinely needs a different order) **THEN** structure it as
+  **problem → solution → wow-metric → how it works → opinion**, joined by spoken bridges into ONE
+  story (never labeled chunks). Specifically: (1) open the problem as a **relatable question**, not
+  a flat statement; (2) name exactly **WHAT was built** — don't say "fixed it"; say e.g. "a
+  long-term memory system" — and don't overstate a module/framework as "a new AI" (verify against
+  the paper); (3) put the **headline metric RIGHT AFTER the solution and BEFORE the mechanism** as
+  the excitement pivot / mid-body re-hook — never bury it at the end; (4) mechanism in clean steps,
+  most surprising step last; (5) close on the honest caveat + viewer payoff + a **callback to a
+  phrase people already know**. Body **~200–230 words**, global tech+non-tech 6th-grade, each beat
+  must build to the next. Full detail: the "DEFAULT BODY FLOW" section under TYPE 4 in
+  `7 script type template.md`. — _why: my drafts over-explained and delivered disconnected
+  info-blocks with the wow-metric buried; from: 2026-07-15 ("Language Models Need Sleep" draft vs
+  the user's finalized version)_
+
+- **IF** the user pastes **multiple competing drafts of the same script** and asks for "the final
+  version" **THEN** run a source/fact-check pass on every disputed number or claim BEFORE merging
+  — never resolve a factual disagreement between drafts by picking the more polished-sounding
+  version or splitting the difference. A surprising claim (a celebrity name, a huge number) is not
+  automatically the embellished one; an ordinary-sounding claim is not automatically the safe one.
+  Verify both, then build the merge from whichever draft's structure/writing is strongest,
+  corrected to the verified facts. — _from: 2026-07-15_
+
 - **IF** the body reaches a **synthesis/payoff line combining two named findings or papers**
   (e.g. "here's what happens when you put both together") **THEN** build it from THREE proven
   moves, not a full rewrite of the line:
@@ -171,6 +200,49 @@ Keep it short and scannable. It's how the user sees your reasoning and trains yo
   - → Rule added/updated in §4A: <the conditional rule, or "none — one-off / not enough signal yet">
 ```
 
+- **2026-07-15 · "Language Models Need Sleep: Learning to Self-Modify and Consolidate Memories"**
+  (Google Research — AI memory / sleep-consolidation). This was feedback on Agent 4's FROM-SCRATCH
+  draft, not a line refine — the user compared my draft to their finalized version and diagnosed HOW
+  I write bodies (so the fix lives mostly in the TEMPLATE, which both writers read).
+  - Subject/tags: named-giant (Google), brain/mind (sleep + dreaming), "you forget too" relatable,
+    benchmark/reversal (10M vs 1M words). Structural: hooks were fine ("acceptable"); the BODY was
+    the problem.
+  - User's diagnosis (gist): hooks good, but in the body I "over explain and things dont feel
+    connected... each paragraph talks about its own story... not creating any rehook or anything that
+    would make it feel exciting or make audience feel something big is about to come." Wanted flow
+    = problem → solution → metrics(real-world/AI impact) → how it works → opinion (mostly, not
+    always); every element connected with storytelling; global tech+non-tech 6th-grade; body 200–230.
+  - What my draft did wrong: (1) used labeled chunks (EVERYDAY STAKES: / WHY THE OLD WAY FAILED: /
+    THE ONE CLEVER IDEA: / WHY IT MATTERS:) → isolated info-blocks (the labeled-body mistake, again);
+    (2) BURIED the wow-metric (10M vs 1M) at the END of the mechanism instead of using it as the
+    mid-body payoff; (3) said the team "fixed it"/"borrowed an idea" without naming WHAT was built →
+    left the audience unsure if it was a model/feature/memory; (4) over-explained, no rising build.
+  - What the FINAL (user's) version did: opened the problem as a relatable QUESTION ("ever wondered
+    why you re-explain yourself to ChatGPT every time?"); bridged "Here's the real reason:" → "So
+    instead," → "That's the problem [Google] decided to fix — by giving AI its first real long-term
+    memory system"; MOVED the 10M-vs-1M metric UP right after the solution ("And here's where it
+    gets interesting:") as the excitement pivot BEFORE the mechanism; then "Here's how it works." +
+    the two steps (sleep = consolidate, dream = self-generated practice); closed on caveat + payoff
+    + callback "…just like you, it finally learned to sleep on it."; ~200 words.
+  - → Encoded as a **DEFAULT BODY FLOW** in the TEMPLATE (TYPE 4, `7 script type template.md`) so
+    BOTH Agent 4 and Agent 5 follow it, plus the §4A rule above. Also carried the accuracy guard:
+    name what was built specifically but don't overstate a module as a whole new model.
+- **2026-07-15 · "Biohub/ESMFold2 protein design"** — user pasted THREE competing drafts (V1/V2/V3)
+  of the same script and asked for "the final version, the one that works well."
+  - Subject/tags: named-giant-reversal (Zuckerberg/Chan), brain-science/emergent-understanding
+    twist, Nobel-Prize callback, money/industry-disruption (drug discovery). Structural: multi-draft
+    MERGE task, not a single-draft refine.
+  - What happened: the drafts disagreed on hard facts — V1/V2 said "6.8B training sequences," V3
+    said "2.8B"; V3 attributed the work to "Zuckerberg's wife's lab," which sounded like the kind
+    of embellishment that should be flagged, not trusted. Web-checked before merging: V3's 2.8B was
+    the real training-set size; V1/V2's 6.8B was real too, but was actually the size of the
+    *released Atlas*, not training data — both drafts were "right" about a real number but wrong
+    about what it measured. The Zuckerberg/Chan claim was independently confirmed TRUE (Biohub).
+  - → Rule: **when multiple drafts disagree on a fact, don't average/split-the-difference and
+    don't default to the more "confident-sounding" draft — go to source and resolve what's
+    actually true.** A claim that sounds like embellishment (a celebrity name, a huge number) is
+    not automatically the wrong one — verify, don't assume. See §4A rule below.
+  - → Rule added to §4A: multi-draft merges require a source pass BEFORE merging, not after.
 - **2026-07-15 · v1→v2 · "Two of the world's biggest AI labs..." (Meta/Alibaba AI-agent memory)**
   - Subject/tags: named-giants-parallel-solutions (Meta vs Alibaba, not underdog-vs-giant — two
     giants each solving half a problem), agentic/how-to-use-AI, technical/infra finding wrapped in

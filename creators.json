@@ -1,0 +1,29 @@
+{
+  "_help": "Editable watch list for creator_stats.py. Add a handle to the right platform list and save; the next run picks it up. JSON has no comments, so keep the structure (commas, quotes, brackets) intact. Handles go WITHOUT the leading @.",
+
+  "_x_help": "X/Twitter accounts. 'role' is a note for you, not used by the code: 'creator' = someone whose content style you benchmark against, 'feed' = a paper-discovery account whose engagement signals which papers are hot.",
+  "x_accounts": [
+    { "handle": "cwolferesearch", "name": "Cameron Wolfe",   "role": "creator" },
+    { "handle": "DAIR_AI",        "name": "DAIR.AI",         "role": "creator" },
+    { "handle": "karpathy",       "name": "Andrej Karpathy", "role": "creator" },
+    { "handle": "_akhaliq",       "name": "AK",              "role": "feed" },
+    { "handle": "alphaxiv",       "name": "alphaXiv",        "role": "feed" },
+    { "handle": "arxiv_org",      "name": "arXiv",           "role": "feed" }
+  ],
+
+  "_instagram_help": "Not wired up yet. Add Reels creators here when ready; needs a separate Apify actor.",
+  "instagram_accounts": [],
+
+  "_apify_help": "Which Apify actor scrapes X, and how its input is shaped. Actor availability and pricing change, so this lives in config rather than in the code. 'lookback_days' bounds how far back each run reaches; 'max_items_per_run' is a hard cost ceiling — the run stops there no matter what.",
+  "apify": {
+    "x_actor": "apidojo/tweet-scraper",
+    "lookback_days": 14,
+    "max_items_per_run": 300,
+    "poll_timeout_seconds": 420
+  },
+
+  "_settings_help": "console_top_n is how many rows the run prints as a leaderboard at the end.",
+  "settings": {
+    "console_top_n": 15
+  }
+}

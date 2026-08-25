@@ -1,0 +1,24 @@
+{
+  "name": "finding-papers-web",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Local web interface for the Finding_Papers 5-agent pipeline",
+  "scripts": {
+    "dev": "concurrently -n server,ui -c cyan,magenta \"node server/index.js\" \"vite\"",
+    "server": "node server/index.js",
+    "ui": "vite",
+    "build": "vite build"
+  },
+  "dependencies": {
+    "@fontsource-variable/inter": "^5.2.8",
+    "express": "^4.21.2",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
+    "concurrently": "^9.1.2",
+    "vite": "^6.0.7"
+  }
+}

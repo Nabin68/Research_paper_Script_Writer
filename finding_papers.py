@@ -31,6 +31,8 @@ from datetime import datetime, timedelta, timezone
 from email.utils import parsedate_to_datetime
 from xml.etree import ElementTree as ET
 
+from research_filter import filter_authentic_research, apply_verification
+
 try:  # keep emoji/unicode prints from crashing the scheduled task on legacy consoles
     sys.stdout.reconfigure(encoding="utf-8")
     sys.stderr.reconfigure(encoding="utf-8")
@@ -50,7 +52,7 @@ USER_COLS = ["picked", "my_notes", "performance"]
 FIELDNAMES = [
     "first_seen", "last_updated", "source", "lab", "title", "authors", "url",
     "arxiv_id", "hf_upvotes", "hf_comments", "reddit_mentions", "github_stars",
-    "trending_score", "category", "summary", "published_iso",
+    "bluesky_score", "trending_score", "category", "summary", "published_iso",
 ] + USER_COLS
 
 # Labs that get a small "from a big lab" score bonus.
@@ -123,13 +125,14 @@ def new_item(**kw):
     item = {
         "source": "", "lab": "community", "title": "", "authors": "", "url": "",
         "arxiv_id": "", "hf_upvotes": 0, "hf_comments": 0, "reddit_mentions": 0,
-        "github_stars": 0, "category": "paper", "summary": "", "published": None,
+        "github_stars": 0, "bluesky_score": 0, "category": "paper", "summary": "",
+        "published": None,
     }
     item.update(kw)
     return item
 
 
-ARXIV_RE = re.compile(r"arxiv\.org/(?:abs|pdf)/(\d{4}\.\d{4,5})", re.I)
+ARXIV_RE = re.compile(r"arxiv\.org/(?:abs|pdf|html)/(\d{4}\.\d{4,5})", re.I)
 
 
 def detect_lab(*texts, default="community"):
@@ -348,6 +351,89 @@ def fetch_reddit(cfg):
     return items, mentions
 
 
+def _bsky_arxiv_ids(post):
+    """All arXiv ids referenced by a Bluesky post — from its text, its rich-text
+    facet links, and any external link-card embed."""
+    rec = post.get("record", {}) or {}
+    parts = [rec.get("text") or ""]
+    for facet in rec.get("facets", []) or []:
+        for feat in facet.get("features", []) or []:
+            if feat.get("uri"):
+                parts.append(feat["uri"])
+    ext = (post.get("embed", {}) or {}).get("external", {}) or {}
+    if ext.get("uri"):
+        parts.append(ext["uri"])
+    return set(ARXIV_RE.findall(" ".join(parts))), strip_tags(ext.get("title") or "")
+
+
+def _clean_bsky_title(card_title, text):
+    """Best-effort paper title from a Bluesky post: prefer the link-card title
+    (strip arXiv's '[id] ' prefix); else the post's first line minus any URLs."""
+    t = re.sub(r"^\[\d{4}\.\d{4,5}\]\s*", "", (card_title or "").strip())
+    if t and "arxiv.org" not in t.lower() and len(t) > 8:
+        return t[:180]
+    line = re.sub(r"https?://\S+", "", (text or "").splitlines()[0] if text else "").strip()
+    line = re.sub(r"(?i)\bread more:?\s*$", "", line).strip(" :-–—")
+    return line[:180]
+
+
+def fetch_bluesky(cfg):
+    """Bluesky buzz signal via the PUBLIC AppView API (read-only, no auth).
+
+    Global post search is auth-walled, so — like the RSS/subreddit lists — we
+    read a curated list of `bluesky_accounts` and treat likes+reposts on posts
+    that link an arXiv paper as the trending signal. One paper can be amplified
+    by several accounts; we sum the engagement across them.
+    """
+    accounts = cfg.get("bluesky_accounts", [])
+    if not accounts:
+        print("  Bluesky: 0 accounts configured")
+        return []
+    api = "https://public.api.bsky.app/xrpc/app.bsky.feed.getAuthorFeed"
+    limit = int(cfg.get("settings", {}).get("bluesky_limit", 40))
+    lookback = int(cfg.get("settings", {}).get("bluesky_lookback_days", 14))
+    cutoff = now_utc() - timedelta(days=lookback)
+    agg = {}  # arxiv_id -> {"eng","mentions","title","pub"}
+    reached = 0
+    for idx, handle in enumerate(accounts):
+        if idx:
+            time.sleep(1)  # be polite to the public AppView
+        data = http_get(f"{api}?actor={handle}&limit={limit}", as_json=True, retries=1)
+        if not data:
+            continue
+        reached += 1
+        for it in data.get("feed", []):
+            post = it.get("post", {}) or {}
+            rec = post.get("record", {}) or {}
+            reason = it.get("reason") or {}  # present when it's a repost
+            post_time = (parse_date_any(reason.get("indexedAt"))
+                         or parse_date_any(rec.get("createdAt")))
+            if isinstance(post_time, datetime) and post_time < cutoff:
+                continue
+            ids, card_title = _bsky_arxiv_ids(post)
+            if not ids:
+                continue
+            eng = int(post.get("likeCount") or 0) + int(post.get("repostCount") or 0)
+            title = _clean_bsky_title(card_title, rec.get("text"))
+            for aid in ids:
+                a = agg.setdefault(aid, {"eng": 0, "mentions": 0, "title": "", "pub": None})
+                a["eng"] += eng
+                a["mentions"] += 1
+                if not a["title"] and title:
+                    a["title"] = title
+                a["pub"] = a["pub"] or post_time
+    out = []
+    for aid, a in agg.items():
+        out.append(new_item(
+            source="bluesky", lab="community",
+            title=a["title"] or f"arXiv {aid}",
+            url=f"https://arxiv.org/abs/{aid}", arxiv_id=aid,
+            bluesky_score=a["eng"], category="paper", published=a["pub"],
+        ))
+    print(f"  Bluesky: {reached}/{len(accounts)} accounts, {len(out)} papers shared")
+    return out
+
+
 def fetch_github_trending(cfg):
     """GitHub Trending (daily), filtered to AI-relevant repos."""
     out = []
@@ -401,8 +487,9 @@ def trending_score(row):
     up = int(row.get("hf_upvotes") or 0)
     red = int(row.get("reddit_mentions") or 0)
     stars = int(row.get("github_stars") or 0)
+    bsky = int(row.get("bluesky_score") or 0)  # summed likes+reposts from curated accounts
     lab_bonus = 10 if is_big_lab(row.get("lab")) else 0
-    raw = up * 3 + red * 6 + stars * 0.2 + lab_bonus
+    raw = up * 3 + red * 6 + stars * 0.2 + bsky * 0.5 + lab_bonus
 
     pub = parse_date_any(row.get("published_iso") or "")
     if pub:
@@ -441,6 +528,7 @@ def merge(ledger, item, today, reddit_mentions):
         row["hf_comments"] = max(int(row.get("hf_comments") or 0), int(item.get("hf_comments") or 0))
         row["reddit_mentions"] = max(int(row.get("reddit_mentions") or 0), red)
         row["github_stars"] = max(int(row.get("github_stars") or 0), int(item.get("github_stars") or 0))
+        row["bluesky_score"] = max(int(row.get("bluesky_score") or 0), int(item.get("bluesky_score") or 0))
         # upgrade lab from 'community' if a better one appears
         if not is_big_lab(row.get("lab")) and is_big_lab(item.get("lab")):
             row["lab"] = item["lab"]
@@ -459,7 +547,8 @@ def merge(ledger, item, today, reddit_mentions):
             "lab": item["lab"], "title": item["title"], "authors": item["authors"],
             "url": item["url"], "arxiv_id": aid, "hf_upvotes": int(item["hf_upvotes"]),
             "hf_comments": int(item["hf_comments"]), "reddit_mentions": red,
-            "github_stars": int(item["github_stars"]), "category": item["category"],
+            "github_stars": int(item["github_stars"]),
+            "bluesky_score": int(item.get("bluesky_score") or 0), "category": item["category"],
             "summary": item["summary"], "picked": "", "my_notes": "", "performance": "",
             "published_iso": pub_iso,
         }
@@ -498,6 +587,8 @@ def write_digest(rows, today, cfg):
             bits.append(f"💬 {r['reddit_mentions']} Reddit")
         if int(r.get("github_stars") or 0):
             bits.append(f"⭐ {r['github_stars']}/day")
+        if int(r.get("bluesky_score") or 0):
+            bits.append(f"🦋 {r['bluesky_score']} Bluesky")
         metrics = " · ".join(bits)
         lab = r.get("lab", "community")
         summ = (r.get("summary") or "").strip()
@@ -537,6 +628,8 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--once", action="store_true", help="run one pull (default)")
     ap.add_argument("--date", help="YYYY-MM-DD label for this run (default: today)")
+    ap.add_argument("--apply-verification", action="store_true",
+                    help="apply Claude Code's verification result to the ledger (no fetch)")
     args = ap.parse_args()
 
     if not os.path.exists(SOURCES_PATH):
@@ -545,6 +638,18 @@ def main():
         cfg = json.load(f)
 
     today = args.date or datetime.now().strftime("%Y-%m-%d")
+
+    # Second pass of the no-key path: prune the items Claude Code rejected, then
+    # rewrite the ledger + digest. No fetching.
+    if args.apply_verification:
+        print(f"== Finding Papers — apply verification ({today}) ==")
+        ledger = load_existing()
+        apply_verification(ledger)
+        rows = write_ledger(ledger)
+        path = write_digest(rows, today, cfg)
+        print(f"Ledger: {CSV_PATH}\nDigest: {path}")
+        return
+
     print(f"== Finding Papers — run for {today} ==")
 
     print("Fetching sources...")
@@ -553,16 +658,29 @@ def main():
     rss = fetch_rss_feeds(cfg)
     scraped = fetch_scrape_pages(cfg)
     reddit_items, reddit_mentions = fetch_reddit(cfg)
+    bluesky = fetch_bluesky(cfg)
     repos = fetch_github_trending(cfg)
 
     ledger = load_existing()
     before = len(ledger)
+    before_keys = set(ledger)
 
-    # Order matters a little: papers first so blog/reddit merge onto them.
-    for item in hf + arxiv + rss + scraped + reddit_items + repos:
+    # Order matters a little: papers first (hf/arxiv/bluesky all carry arxiv_id, so
+    # Bluesky buzz merges onto the real paper row) so blog/reddit merge onto them.
+    for item in hf + arxiv + bluesky + rss + scraped + reddit_items + repos:
         if not item.get("title"):
             continue
         merge(ledger, item, today, reddit_mentions)
+
+    # Authenticity gate — runs after merge() and before trending_score() (in
+    # write_ledger). Only items newly added this run are candidates; existing
+    # rows and any user-annotated row are untouched. Fail open on any error so
+    # filtering can never kill the run.
+    new_keys = set(ledger) - before_keys
+    try:
+        filter_authentic_research(ledger, new_keys, cfg, today)
+    except Exception as e:  # noqa: BLE001
+        print(f"  ! authenticity filter error ({e}) — keeping all items this run")
 
     rows = write_ledger(ledger)
     added = len(ledger) - before

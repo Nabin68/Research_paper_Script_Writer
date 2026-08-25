@@ -1,19 +1,19 @@
-# Agent 4 — script-writing brief · 2026-07-14
+# Agent 4 — script-writing brief · 2026-07-15
 
 **Target paper:** SensorFM: Towards a general intelligence and interface for wearable health data
 - URL: https://research.google/blog/sensorfm-towards-a-general-intelligence-and-interface-for-wearable-health-data/
 - Lab: Google Research · HF upvotes: 0 · Trending: 6
 - Abstract/summary: Generative AI
 
-## ⚙️ Extra instructions for THIS script (highest priority)
+## ⚙️ Extra instructions
 
-Punchy lines. Lead with the trillion-minutes + lab-accuracy numbers. Keep it very simple - my mom should get it.
+(none given — use page defaults)
 
 ## 📋 What Claude does next
 1. Web-search the paper to confirm facts + pull the best wow-numbers.
 2. Write **5 hooks** (3 in proven patterns, 2 experimental) per `hook.md`.
 3. Write a **connected, easy-English body** (TYPE 4 in the script-type template).
-4. Add **CTA + caption + hashtags**. Save to `scripts/2026-07-14-sensorfm-towards-a-general-intelligence-and-interf.md`.
+4. Add **CTA + caption + hashtags**. Save to `scripts/2026-07-15-sensorfm-towards-a-general-intelligence-and-interf.md`.
 
 ---
 
@@ -73,8 +73,11 @@ part."* / *"Here's what nobody realizes."* Then deliver. (This is the "hook → 
 re-hook" rhythm — keep re-opening curiosity every few seconds through the body.)
 
 ## 📦 WHAT THE WRITER OUTPUTS
-**5 hooks per script:** hooks 1–3 in the proven patterns above (safe, on-brand), hooks 4–5
-experimental/new angles to test. Mark each with the pattern it uses.
+**A flexible set of hooks per script** — as many strong ones as the paper genuinely supports (no
+fixed number). Lead with the proven patterns above, then add experimental/new angles to test.
+Number them and keep a short strategy tag in each bracket: `[HOOK 1 — Number punch]`,
+`[HOOK 2 — Underdog vs giants]`, etc. Output them inside the 🔒 UNIVERSAL SCRIPT FORMAT (see
+`7 script type template.md` TYPE 4): bold, no emojis, with a `Reference:` links block on top.
 
 ---
 
@@ -449,33 +452,160 @@ Which source surprised you most? Follow for more hidden wealth secrets.
 type for this page. See `Winning research paper Script part 1.md` (Colgate, 60.9k) and
 `part 2.md` (Lighthouse, 45.8k) for the two proven shapes, and `hook.md` for hooks.
 
-### TEMPLATE STRUCTURE:
+### 🔒 UNIVERSAL SCRIPT FORMAT (this is THE format — Agent 4 AND Agent 5 must output exactly this)
+
+The final script has two parts: **metadata** (keeps its emoji headers) and the **SCRIPT BLOCK**
+(the spoken part — **bold text, NO emojis**). Layout, top to bottom:
+
 ```
-🎣 HOOK (0-3 sec):  [ONE shocking number/comparison + a named giant or underdog. 6th-grade words.]
-   "[Company] just made AI [do X] [N×/N%] better." OR
-   "[Giants] are running behind [named person] — he just [big claim]."
+📌 SCRIPT TITLE: [Catchy, specific title]
+🎯 ANGLE: [the specific approach/perspective]
+👥 TARGET AUDIENCE: [who this is for]
+📊 SCRIPT TYPE: TYPE 4 — AI Research Paper
 
-🔁 RE-HOOK (3-6 sec):  [Re-open the loop so no one scrolls]
-   "And the reason why is even crazier." / "But that's not the shocking part."
+Verified facts (web-checked, <date>):
+- [each key fact/number, with where it's from]
 
-📍 EVERYDAY STAKES (6-12 sec):  [The normal thing everyone accepts — plain, no jargon]
-   "Your ChatGPT and Claude are trained the slow, brutally expensive way."
+---
 
-❌ WHY THE OLD WAY FAILED (12-22 sec):  [Show the dumb old behavior, concretely, a bit funny]
-   "The old trick? Ask AI to rate a product 1-5. It always said '3.' Useless."
+**Reference:** (verify every fact/number below against these)
+- Paper / arXiv / Reddit source: <url>
+- X / Twitter post (if any): <url>
+- Article(s) / press: <url>
+- Demo / repo / docs (if any): <url>
 
-💡 THE PAPER'S ONE CLEVER IDEA (22-35 sec):  [The switch, in plain words + a human analogy]
-   "So they flipped it: don't ask AI for a number — ask it to DESCRIBE, then convert words to a score."
+**[HOOK 1 — <short strategy tag>]**
+**"[ONE shocking number/comparison + a named giant or underdog. 6th-grade words.]"**
 
-📊 THE PROOF NUMBER (35-45 sec):  [The single most shocking stat — before→after / × / $]
-   "That one switch took it from 26% to 88% accuracy."
+**[HOOK 2 — <short strategy tag>]**
+**"[different angle on the same finding]"**
 
-🌍 WHY IT MATTERS TO YOU (45-55 sec):  [Zoom out to the $ / job / brain / body stake]
-   "This just automated a chunk of an $80 billion industry."
+**[HOOK 3 — <short strategy tag>]**
+**"[…]"**
 
-🎯 CTA (55-60 sec):
-   "Comment [WORD] and I'll DM you the paper. Follow for AI breakdowns before everyone catches on."
+… list ALL strong hooks (flexible count — as many as the paper genuinely supports, numbered
+1,2,3…; lead with proven patterns, then experimental). Each keeps a short strategy tag in its
+bracket (e.g. Number punch, Underdog-vs-giant, Brain/body, You're-being-fooled, Small-beats-big).
+
+**[RE-HOOK]**
+**[one line that re-opens the loop — "And the way they pulled it off is even crazier."]**
+
+**[BODY]**
+**[ONE continuous flowing block — NO sub-labels, NO headers sitting in the text. Follow the
+DEFAULT BODY FLOW (problem → solution → wow-metric → how it works → opinion), moving beat-to-beat
+through spoken bridge sentences, never bold headers. ~200–230 words, global 6th-grade English. See
+"BODY IS ONE STORY" and "DEFAULT BODY FLOW" below — the two most important rules in this template.]**
+
+**[CTA]**
+**[Comment "[WORD]" and I'll DM you the paper/demo.]**
+
+---
+
+✅ VIRALITY CHECKLIST: [tick the levers hit]
+📊 TRIGGERS USED: [list]
+📱 CAPTION: [caption — emojis OK here]
+🏷️ HASHTAGS: [10ish]
 ```
+
+**Format rules (non-negotiable):**
+- **SCRIPT BLOCK = everything from `Reference:` through `[CTA]`. It is ALL BOLD and has ZERO
+  emojis.** The metadata above/below it keeps its emoji headers (📌 🎯 👥 📊 ✅ 📱 🏷️).
+- **`Reference:` sits at the TOP of the script block** with real, clickable source links so the
+  user can fact-check every claim. Never ship a script without it.
+- **Hooks are numbered `[HOOK 1 — tag]`, `[HOOK 2 — tag]`…** — flexible count, small strategy tag
+  kept, no descriptive prose labels, no emoji.
+- **No timestamps** in the script (no "(0-3 sec)").
+- `[RE-HOOK]` comes AFTER the hooks and BEFORE `[BODY]`.
+
+### 🔒 BODY IS ONE STORY, NOT FOUR LABELED CHUNKS — the most-broken rule, fix this first
+
+**Corrected 2026-07-15** after a real side-by-side comparison showed labeled sections read as
+disconnected and hard to follow, even though the underlying facts were identical. Root cause:
+writing "to a label" (filling in content under a bold header like `WHY THE OLD WAY FAILED:`)
+produces a self-contained chunk that doesn't have to connect to what came before or after. The
+fix — write the body as ONE continuous piece with these techniques:
+
+1. **Replace every section header with a spoken bridge sentence** that does the same signposting
+   job invisibly. The label never appears in the delivered script — only the bridge line does.
+   | Old (label, cut this) | New (bridge sentence, keep this) |
+   |---|---|
+   | `WHY THE OLD WAY FAILED:` | *"But it had a hard limit:"* / *"But there's a catch."* |
+   | `THE ONE CLEVER IDEA:` | *"But recently, [actor] fixed that."* / *"So they tried something different."* |
+   | `THE PROOF NUMBER:` (mid-reveal) | *"And here's the part that will blow your mind."* |
+   | `WHY IT MATTERS:` | *"And here's why it matters."* / *"Here's what that actually means for you."* |
+   A bridge line is itself a mini re-hook — it re-opens curiosity right before the next beat,
+   which a bare header can never do.
+2. **Earn the stakes before stating the pain point.** Don't open with "X used to take months" —
+   first give ONE concrete, relatable example of why the thing matters (a virus, a job, a body
+   part), THEN the pain point. Context before complaint.
+3. **Personify over listing.** "It quietly built its own internal sense of shape and function"
+   beats "it mapped the shape, function, and evolution of 6.8 billion proteins" — the first reads
+   like a story beat: the second is a fact-dump of three abstract nouns plus a number.
+4. **Cut smart-sounding-but-unclear phrases**, even ones you personally like. "A 3D world model
+   hiding inside a text predictor" sounds clever to an AI-literate reader but isn't instantly
+   clear to "little tech, little non-tech, everyone" — if it needs a beat of translation, cut it.
+5. **Don't stack two dense facts in one sentence.** Give every big number or claim its own
+   sentence and room to land. If a sentence has two "and here's the wild part" moments in it,
+   split it.
+6. **Don't introduce a narrow technical detail right before the real payoff.** If the closing
+   beat is about disease targets, don't drop an unrelated narrow specific (e.g. "antibodies")
+   two lines earlier — it competes with the payoff instead of building to it. Keep the general
+   claim general, save the specific application for its dedicated beat.
+
+**Worked example** (same facts, same order — compare the flow):
+- ❌ *Labeled/choppy:* "So this new AI skipped the flashcards. They fed it text — the letters of
+  2.8 billion proteins — and made it guess the next letter... **[THE PROOF NUMBER:]** But by
+  learning to predict text, it accidentally mapped the shape, function, and evolution of 6.8
+  billion proteins — a full 3D 'world model' hiding inside a text predictor. Tested head-to-head,
+  it beat AlphaFold at predicting how antibodies grab their targets."
+- ✅ *Flowing:* "They fed a new AI model 2.8 billion raw protein sequences and trained it the way
+  ChatGPT learns language — by guessing the next letter, over and over. **And here's the part
+  that will blow your mind.** The model was never shown a 3D shape during training. But by
+  mastering sequences, it quietly built its own internal sense of shape and function. Researchers
+  built a public library of 6.8 billion proteins and 1.1 billion predicted structures — beating
+  every other leading model head-to-head."
+
+### 🔒 DEFAULT BODY FLOW — order the beats so each one builds to the next
+
+**Added 2026-07-15 from a real before/after (the "Language Models Need Sleep" script).** The draft
+was rejected for a specific failure: the body *over-explained* and each paragraph "talked about its
+own story" — correct facts, but delivered as disconnected info-blocks with no build, nothing that
+makes a viewer feel *something big is about to come*. The fix was as much about ORDER as wording.
+Default flow (use it MOSTLY — bend it only when a specific paper genuinely needs a different order):
+
+**problem → solution → wow-metric → how it works → opinion**
+
+1. **PROBLEM — open as a relatable question, not a flat statement.** Pull the viewer in with a
+   "have you ever noticed…?" they already feel, then name the real reason behind it.
+   - ❌ flat: *"Every time you close a chat with ChatGPT, it forgets you."*
+   - ✅ question: *"Ever wondered why you have to re-explain yourself to ChatGPT every single time?"*
+   Then bridge to the cause (*"Here's the real reason:"* → why the old way is stuck — e.g. the only
+   way to teach it permanently is to retrain from scratch, millions of dollars, months), then
+   *"So instead,"* → the consequence (it stays frozen on day-one knowledge).
+2. **SOLUTION — name exactly WHAT was built, specifically.** Never leave the viewer unsure whether
+   it's a model, a feature, or a method. *"A Google team fixed it"* is too vague and confuses people
+   — say *"they built AI its first real long-term memory system, based on how human sleep works."*
+   Accuracy guard: don't overstate — if the paper built a memory *module/framework on top of
+   existing models*, say that, not "a new AI." Verify against the paper before locking the wording.
+3. **WOW-METRIC — put the headline number HERE, right after the solution and BEFORE the mechanism.**
+   This is the payoff that creates "something big is coming," and it doubles as a mid-body re-hook
+   into the how. Do NOT bury the metric at the end of the mechanism. Bridge: *"And here's where it
+   gets interesting:"* → *"it stayed almost perfectly accurate even after 10 million words of
+   context, while rival methods broke down after just 1 million."*
+4. **HOW IT WORKS — the mechanism in clean steps, AFTER the metric has earned attention.** Bridge:
+   *"Here's how it works."* Keep steps concrete and short; save the most surprising step for last
+   (in the Sleep script: the AI "dreams" — writes its own practice questions and rehearses, no human).
+5. **OPINION — honest caveat + why it matters + a callback close.** State the researchers' own
+   limit (*"this is a first proof, not a finished product"*), then the if-it-scales payoff for the
+   viewer, and land on a callback to a phrase people already know (*"…because, just like you, it
+   finally learned to sleep on it."*). Short sentences read best as a spoken outro.
+
+**Connector menu (spoken bridges that carry the flow):** *"Here's the real reason:"* (turns a
+question into its answer) · *"So instead,"* (cause → effect) · *"That's the problem [X] decided to
+fix —"* / *"Until now."* (pivot into the solution — a strong mid-script re-hook) · *"And here's
+where it gets interesting:"* (into the metric) · *"Here's how it works."* (into the steps) ·
+*"And here's why it matters."* (into the opinion). Test: if a sentence could be deleted and the next
+one wouldn't notice, the flow is broken — add a bridge or cut the sentence.
 
 ### RULES FOR THIS TYPE (non-negotiable):
 - **Easy English only.** Both tech and non-tech viewers must follow. Swap every technical term
@@ -487,9 +617,17 @@ type for this page. See `Winning research paper Script part 1.md` (Colgate, 60.9
 - **Numbers are your weapon** (unless the per-script instruction says otherwise). Lead the hook
   with one; drop the proof number mid-body.
 - **One idea per beat**, short punchy sentences, keep it ≤ ~90s.
+- **Body length ~200–230 words.** Long enough to tell the story, short enough to stay tight — if
+  it runs over, you're over-explaining; cut, don't compress into fragments.
+- **Rising build, not flat delivery.** Every beat must raise curiosity for the next (a mini
+  re-hook). If a stretch reads as plain "here's another fact," add a bridge/pivot or cut it.
+- **Global audience.** National + international viewers — avoid region-specific idioms, currencies,
+  or references that don't translate everywhere.
 
-### OUTPUT (for this type): 5 hooks (3 proven-pattern + 2 experimental) → 1 full connected
-body → CTA → caption + hashtags. See the output format at the bottom of this file.
+### OUTPUT (for this type): follow the 🔒 UNIVERSAL SCRIPT FORMAT above exactly — metadata →
+`Reference:` links → numbered `[HOOK n — tag]` (flexible count) → `[RE-HOOK]` → `[BODY]` (bold,
+no emojis) → `[CTA]` → checklist/caption/hashtags. This is the single format for BOTH the writer
+(Agent 4) and the refiner (Agent 5).
 
 ---
 
@@ -530,7 +668,13 @@ Sometimes scripts combine types:
 ---
  
 ## OUTPUT FORMAT FOR ALL TYPES
- 
+
+> ⚠️ **For @aiprofessor.vs use the 🔒 UNIVERSAL SCRIPT FORMAT under TYPE 4 — not the generic
+> layout below.** This page only ships TYPE 4 (AI research papers), so its `Reference:` + numbered
+> `[HOOK n — tag]` + bold, emoji-free `[BODY]` format replaces the old
+> "🎣 HOOK OPTIONS (5 variations)" / "📝 FULL SCRIPT" headings shown here. The template below is
+> kept only as the generic reference for Types 1–3.
+
 When generating scripts, always provide:
  
 ```
